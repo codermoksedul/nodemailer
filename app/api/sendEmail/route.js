@@ -17,11 +17,7 @@ export async function POST(request) {
             from: 'codermoksedul@gmail.com',
             to: to, // Use the provided 'to' email address
             subject: subject,
-            html: `
-                <h3>Hello Augustine</h3>
-                <li> title: ${subject}</li>
-                <li> message: ${message}</li> 
-            `
+            html: `${message}`
         };
 
         await transporter.sendMail(mailOption);
