@@ -1,11 +1,13 @@
-
+// components/EmailForm.jsx
 "use client";
 import { useState } from 'react';
 
 const EmailForm = () => {
-  const [recipient, setRecipient] = useState('dmoksedulislam@gmail.com'); 
-  const staticSubject = 'Static Subject'; 
-  const staticMessage = 'This is a static message.';
+  const [toEmail, setToEmail] = useState('');
+
+  const handleToEmailChange = (e) => {
+    setToEmail(e.target.value);
+  };
 
   const handleSendEmail = async (e) => {
     e.preventDefault();
@@ -17,9 +19,9 @@ const EmailForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          to: recipient,
-          subject: staticSubject,
-          message: staticMessage
+          to: toEmail,
+          subject: "Your Static Subject",  // Static subject
+          message: "Your Static Message"   // Static message
         })
       });
 
@@ -36,16 +38,16 @@ const EmailForm = () => {
   return (
     <form onSubmit={handleSendEmail} className="h-full w-1/3 space-y-6">
       <div className="relative flex flex-col space-y-1">
-        <label htmlFor="recipient" className="text-sm font-light text-gray-500">
-          To:
+        <label htmlFor="toEmail" className="text-sm font-light text-gray-500">
+          To
         </label>
         <input
           type="email"
-          id="recipient"
+          id="toEmail"
           required
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
-          placeholder="Enter the recipient email address"
+          value={toEmail}
+          onChange={handleToEmailChange}
+          placeholder="Enter the recipient's email address"
           className="rounded-xl border-2 border-gray-400 p-2"
         />
       </div>

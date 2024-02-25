@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 export async function POST(request) {
     try {
-        const { subject, message } = await request.json();
+        const { to, subject, message } = await request.json();
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -14,9 +14,9 @@ export async function POST(request) {
         });
 
         const mailOption = {
-            from: 'codermoksedul@gmail.com', // Replace with your Gmail address
-            to: 'dmoksedulislam@gmail.com', // Replace with the recipient email address
-            subject: "Send Email Tutorial",
+            from: 'codermoksedul@gmail.com',
+            to: to, // Use the provided 'to' email address
+            subject: subject,
             html: `
                 <h3>Hello Augustine</h3>
                 <li> title: ${subject}</li>
